@@ -3,17 +3,33 @@ import java.nio.charset.StandardCharsets;
 
 public class Main {
     public static void main(String[] args) {
-        Integer age = 37;
-        String name = "Анна";
-        String personInfo = name + " - " + age + " лет";
-        String value = age.toString();
-        System.out.println(String.valueOf(age));
-        System.out.println(Charset.defaultCharset());
+        String header1 = "Content : text/html; charset=utf-8;";
+        String header2 = "Content : text/html; charset=windows-1251;";
+        String header3 = "Content : text/html; charset=ISO-8859-1;";
 
-        String text = "Hello всем";
-        String encoded = new String(text.getBytes(),
-                StandardCharsets.US_ASCII); //создаём новую строку
-        System.out.println(encoded);
-        System.out.println(Charset.defaultCharset());
+        String header4 = "Content : text/html;";
+        String header5 = "Content : text/html; charset=";
+        String header6 = "Content : text/html; charset=;";
+
+        System.out.println(getEncoding(header1));
+        System.out.println(getEncoding(header2));
+        System.out.println(getEncoding(header3));
+
+        System.out.println(getEncoding(header4));
+        System.out.println(getEncoding(header5));
+        System.out.println(getEncoding(header6));
+    }
+
+    public static String getEncoding(String header){
+        String charsetStr = "charset=";
+        int start = header.indexOf(charsetStr);
+        int end = header.indexOf(';', start);
+
+        if(start<0 || end < 0){
+            return "";
+        }
+
+        String encoding = header.substring(start + charsetStr.length(), end);
+        return encoding;
     }
 }
