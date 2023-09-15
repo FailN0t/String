@@ -1,28 +1,35 @@
-import java.time.LocalDate;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 public class Main {
     public static void main(String[] args) {
-        String empty = "";
+        String header1 = "Content : text/html; charset=utf-8;";
+        String header2 = "Content : text/html; charset=windows-1251;";
+        String header3 = "Content : text/html; charset=ISO-8859-1;";
 
-        boolean isEmpty = empty.length() == 0;
-        System.out.println(empty.isEmpty());
-        System.out.println(empty.isBlank());
+        String header4 = "Content : text/html;";
+        String header5 = "Content : text/html; charset=";
+        String header6 = "Content : text/html; charset=;";
 
-        LocalDate birthday = LocalDate.of(1986, 4, 15);
+        System.out.println(getEncoding(header1));
+        System.out.println(getEncoding(header2));
+        System.out.println(getEncoding(header3));
 
-        String blank = " \t \n ";
-        System.out.println(blank.isBlank());
-        int age = 55;
-        String name = "Дмитрий";
-        String surName = "Петров";
-        String personInfo = name + ' ' + surName + " - " + birthday;
+        System.out.println(getEncoding(header4));
+        System.out.println(getEncoding(header5));
+        System.out.println(getEncoding(header6));
+    }
 
-        System.out.println(personInfo);
+    public static String getEncoding(String header){
+        String charsetStr = "charset=";
+        int start = header.indexOf(charsetStr);
+        int end = header.indexOf(';', start);
 
-        String managerName = "Василий";
-        String  customerName = "Васи".concat("лий");
-        System.out.println(managerName.equals(customerName));
+        if(start<0 || end < 0){
+            return "";
+        }
 
-
+        String encoding = header.substring(start + charsetStr.length(), end);
+        return encoding;
     }
 }
