@@ -1,28 +1,47 @@
-import java.time.LocalDate;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 public class Main {
     public static void main(String[] args) {
         String empty = "";
+        boolean isEmpty = empty.length() == 0; // length - длинна строки
 
-        boolean isEmpty = empty.length() == 0;
-        System.out.println(empty.isEmpty());
-        System.out.println(empty.isBlank());
+        isEmpty = empty.isEmpty(); // isEmpty - проверка пустая ли строка
 
-        LocalDate birthday = LocalDate.of(1986, 4, 15);
+        isEmpty = empty.isBlank(); // true если строка пуста или вней тольео символы " \t \n"
 
-        String blank = " \t \n ";
-        System.out.println(blank.isBlank());
-        int age = 55;
-        String name = "Дмитрий";
-        String surName = "Петров";
-        String personInfo = name + ' ' + surName + " - " + birthday;
+        long start = System.currentTimeMillis();
+         String mask = "mask 9865";
+         String goods = "";
 
-        System.out.println(personInfo);
+         for(int i = 0; i<100_000; i++){
+             goods += mask + "\n";
+         }
+        System.out.println(System.currentTimeMillis() - start);
+        System.out.println(goods.length());
 
-        String managerName = "Василий";
-        String  customerName = "Васи".concat("лий");
-        System.out.println(managerName.equals(customerName));
+        start = System.currentTimeMillis();
+        mask = "mask 9865";
+        StringBuilder goods1 = new StringBuilder();
 
+        for(int i = 0; i<10_000_000; i++){
+            goods1.append(mask).append("\n");
+        }
+        System.out.println(System.currentTimeMillis() - start);
+        System.out.println(goods1.length());
 
+        start = System.currentTimeMillis();
+        mask = "mask 9865";
+        String goods2 = "";
+
+        for(int i = 0; i<10_000_000; i++){
+            goods2.concat(mask).concat("\n");
+        }
+        System.out.println(System.currentTimeMillis() - start);
+        System.out.println(goods1.length());
+
+        String name = "Dmitri";
+        String customerName = "Dmi" + "tri";
+        System.out.println(name.equals(customerName));//наиболее правильный способ сравнения строк
     }
 }
