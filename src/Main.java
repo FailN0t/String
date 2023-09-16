@@ -77,6 +77,19 @@ public class Main {
             // соответствующий регулярному выражению текст
             System.out.println(citation);
         }
+        String data = "256 * 32 = ?";
+        String[] word1 = data.split("\s+[^,;:]\s+");
+        for (int i = 0; i < word1.length; i++) {
+            System.out.println(word1[i]);
+        }
+        String text5 = "A23E-8M28-76AF-2L65-24A3";
+        String regex5 = "[A-F0-9]{4}";
+        Pattern pattern5 = Pattern.compile(regex5);
+        Matcher matcher5 = pattern5.matcher(text5);
+        matcher5.find();
+        matcher5.find();
+        matcher5.find();
+        System.out.println(matcher5.group());
     }
 
     public static String formatPhoneNumber(String phone, String regex) {
