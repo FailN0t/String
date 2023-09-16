@@ -1,28 +1,28 @@
-import java.time.LocalDate;
+import java.util.Scanner;
+import java.util.StringJoiner;
 
 public class Main {
     public static void main(String[] args) {
-        String empty = "";
+        String name1 = "Алексей";
+        String name2 = "Дмитрий";
+        System.out.println(name2 == name1);//ссылки на разные оъекты
 
-        boolean isEmpty = empty.length() == 0;
-        System.out.println(empty.isEmpty());
-        System.out.println(empty.isBlank());
+        name1 = "Алексей";
+        name2 = "Алексей";
+        System.out.println(name2 == name1);//ссылки на один оъект
 
-        LocalDate birthday = LocalDate.of(1986, 4, 15);
+        name1 = "Алексей";
+        name2 = new String("Алексей");
+        System.out.println(name2 == name1);//ссылки на разные оъекты
 
-        String blank = " \t \n ";
-        System.out.println(blank.isBlank());
-        int age = 55;
-        String name = "Дмитрий";
-        String surName = "Петров";
-        String personInfo = name + ' ' + surName + " - " + birthday;
+        name1 = "Алексей";
+        name2 = new String("Алексей").intern();//говорим передать ссылку на такойже объект
+        // в пуле
+        System.out.println(name2 == name1);//ссылки на разные оъекты
 
-        System.out.println(personInfo);
 
-        String managerName = "Василий";
-        String  customerName = "Васи".concat("лий");
-        System.out.println(managerName.equals(customerName));
 
 
     }
+
 }
